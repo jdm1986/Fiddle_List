@@ -1,3 +1,4 @@
+
 import pandas as pd
 import numpy as np
 import difflib as dl
@@ -42,8 +43,8 @@ np.sort(tune_array)
 
 for tune in tune_array:
     for tune2 in tune_array:
-        if dl.SequenceMatcher(None, tune, tune2) < 1.0:
-            array.remove(tune2)
+        if (dl.SequenceMatcher(None, tune, tune2).ratio() < 1) and (dl.SequenceMatcher(None, tune, tune2).ratio() > 0.90):
+            np.delete(tune_array, tune)
 
 
 tune_df = pd.DataFrame(tune_array)
