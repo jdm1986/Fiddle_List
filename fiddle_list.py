@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import difflib as dl
 
 tune_list = []
 
@@ -38,6 +39,12 @@ for tune in tunes:
 tune_array = np.asarray(tune_list)
 
 np.sort(tune_array)
+
+for tune in tune_array:
+    for tune2 in tune_array:
+        if dl.SequenceMatcher(None, tune, tune2) < 1.0:
+            array.remove(tune2)
+
 
 tune_df = pd.DataFrame(tune_array)
 
